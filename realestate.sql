@@ -1,6 +1,9 @@
 
-DROP TABLE Customers
-DROP TABLE Properties
+DROP TABLE Customers;
+DROP TABLE Properties;
+
+DROP SEQUENCE Cust_seq;
+DROP SEQUENCE Prop_seq;
 
 
 CREATE TABLE Customers
@@ -28,11 +31,11 @@ CREATE TABLE Properties
 ,   Num_Bedrooms         NUMBER
 ,   Num_Baths            NUMBER
 ,   Square_Feet          NUMBER
-,   Street_Address      VARCHAR2(20)
-,   City                VARCHAR2(20)
-,   State               CHAR(2)
-,   Zip_Code            NUMBER NOT NULL
-,   CONSTRAINT FKProp   FOREIGN KEY (Cust_ID) REFERENCES Customers
+,   Street_Address       VARCHAR2(20)
+,   City                 VARCHAR2(20)
+,   State                CHAR(2)
+,   Zip_Code             NUMBER NOT NULL
+,   CONSTRAINT FKProp    FOREIGN KEY (Cust_ID) REFERENCES Customers
 );
 
 CREATE SEQUENCE Cust_seq 
