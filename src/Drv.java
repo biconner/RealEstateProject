@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class Drv {
+public class Drv {
+    public static void main(String[] args) {
+        REC rec = new REC();
+        rec.start();
+    }
 }
