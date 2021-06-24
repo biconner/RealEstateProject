@@ -1,60 +1,46 @@
-import java.io.Serializable;
 
-public class DAO implements Serializable {
-    private String state;
-    private int count;
-    private int minPrice;
-    private int maxPrice;
-    private double avgPrice;
 
-    DAO(){}
+public class DAO {
 
-    DAO(String state, int count, int minPrice, int maxPrice, double avgPrice){
+    private final String state;
+    private final int count;
+    private final int min;
+    private final int max;
+    private final int avg;
+
+    public DAO(String state, int count, int min, int max, int avg) {
         this.state = state;
         this.count = count;
-        this.minPrice = minPrice;
-        this.maxPrice = maxPrice;
-        this.avgPrice = avgPrice;
-
+        this.min = min;
+        this.max = max;
+        this.avg = avg;
     }
 
-    public String getState() {
-        return state;
+    String getState() { return state; }
+    int getCount() { return count; }
+    int getMin() { return min; }
+    int getMax() { return max; }
+    int getAvg() { return avg; }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %d, %d, %d, %d", state, count, min, max, avg);
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public int getMinPrice() {
-        return minPrice;
-    }
-
-    public void setMinPrice(int minPrice) {
-        this.minPrice = minPrice;
-    }
-
-    public int getMaxPrice() {
-        return maxPrice;
-    }
-
-    public void setMaxPrice(int maxPrice) {
-        this.maxPrice = maxPrice;
-    }
-
-    public double getAvgPrice() {
-        return avgPrice;
-    }
-
-    public void setAvgPrice(double avgPrice) {
-        this.avgPrice = avgPrice;
+    public String get(String column) {
+        switch (column) {
+            case "State":
+                return state;
+            case "Count":
+                return String.format("%d", count);
+            case "Low":
+                return String.format("%d", min);
+            case "High":
+                return String.format("%d", max);
+            case "Average":
+                return String.format("%d", avg);
+            default:
+                return "";
+        }
     }
 }

@@ -1,7 +1,8 @@
 
-import java.util.Scanner;
+import java.util.*;
 
 public class TextIO {
+
     private Scanner scan;
 
     public TextIO() {
@@ -13,45 +14,29 @@ public class TextIO {
     }
 
     public int[] calculateColumnWidth(String[][] results) {
-        int[] rowWidths = new int[results.length];
+        int[] rowWidths = new int[results[0].length];
+        for (int i = 0; i < results[0].length; i++) {
+            int largestCharacterCount = Integer.MIN_VALUE;
 
-        for (int i = 0; i < results.length; i++) {
-            rowWidths[i] = largestAmount(results[i]);
+
+            for (int j = 0; j < results.length; j++) {
+                int characterCount = results[j][i].length();
+                if (characterCount > largestCharacterCount) {
+                    largestCharacterCount = characterCount;
+                }
+            }
+
+            rowWidths[i] = largestCharacterCount;
         }
+
         return rowWidths;
-    }
-
-    private int largestAmount(String[] result) {
-        int largest = Integer.MIN_VALUE;
-
-        for (int i = 0; i < result.length; i++) {
-            if (result[i].length() > largest) {
-                largest = result[i].length();
-            }
-        }
-
-        return largest;
-    }
-
-    private int smallestAmount(String[] result) {
-        int smallest = Integer.MAX_VALUE;
-
-        for (int i = 0; i < result.length; i++) {
-            if (result[i].length() < smallest) {
-                smallest = result[i].length();
-            }
-        }
-
-        return smallest;
     }
 
     public String formatReport(String[][] results, int padding, int[] columnWidths) {
         String report = "";
-        int rowLength = results[0].length;
-        int colLength = results.length;
-        for (int i = 0; i < rowLength; i++) {
-            for (int j = 0; j < colLength; j++) {
-                String data = results[j][i];
+        for (int i = 0; i < results.length; i++) {
+            for (int j = 0; j < results[0].length; j++) {
+                String data = results[i][j];
                 int columnWidth = columnWidths[j];
                 report += String.format("%-" + (columnWidth + padding) + "s", data);
             }
