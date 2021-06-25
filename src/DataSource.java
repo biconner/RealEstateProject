@@ -10,8 +10,8 @@ public class DataSource {
 
     private DataSource() throws SQLException {
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        conn = DriverManager.getConnection("jdbc:oracle:thin:@Worf.radford.edu:1521:itec3", "kwood3",
-                "fykfep-qitMa3-hegwyj");
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@Worf.radford.edu:1521:itec3", " ",
+                " ");
     }
 
     static DataSource getInstance() {
