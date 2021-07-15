@@ -1,5 +1,5 @@
 
-DROP TABLE Customers;
+DROP TABLE BICONNER.Customers;
 DROP TABLE Properties;
 
 DROP SEQUENCE Customer_seq;
@@ -24,8 +24,8 @@ CREATE TABLE Customers
 
 CREATE TABLE Properties
 (
-    List_ID              NUMBER
-,   Cust_ID              NUMBER
+    Listing_ID              NUMBER
+,   Cust_ID          NUMBER
 ,   Listing_Date         DATE
 ,   Price                NUMBER NOT NULL
 ,   Num_Bedrooms         NUMBER
@@ -35,8 +35,7 @@ CREATE TABLE Properties
 ,   City                 VARCHAR2(20)
 ,   State                CHAR(2)
 ,   Zip_Code             VARCHAR2(5) NOT NULL
-,   CONSTRAINT PK_Property  PRIMARY KEY (List_ID)
-,   CONSTRAINT FKProp    FOREIGN KEY (Cust_ID) REFERENCES Customers (Cust_ID)
+,   CONSTRAINT PK_Property  PRIMARY KEY (Listing_ID)
 ,   CONSTRAINT UK_Property  UNIQUE  (Street_Address, City, State, Zip_Code)
 );
 
@@ -44,7 +43,7 @@ CREATE SEQUENCE Customer_seq
     START WITH 705 
     INCREMENT BY 1;
 
-CREATE SEQUENCE Propert_seq
+CREATE SEQUENCE Property_seq
     START WITH 1007
     INCREMENT BY 1;
 
