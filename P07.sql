@@ -13,13 +13,10 @@ CURSOR cBuyers IS
 
 BEGIN
 
-SELECT listingID, ApprovalNo INTO vListingID, vApprovalID
-FROM Offers
+SELECT Offers.listingID, Offers.ApprovalNo, Listings.propertyID INTO vListingID, vApprovalID, vPropertyID
+FROM Offers INNER JOIN Listings
+ON Offers.ListingID = Listings.listingID
 WHERE vOfferID = Offers.OfferID;
-
-SELECT propertyID INTO vPropertyID
-FROM Listings
-WHERE vListingID = listingID;
 
 OPEN cBuyers;
         LOOP
@@ -29,14 +26,13 @@ OPEN cBuyers;
         END LOOP;
     CLOSE cBuyers;
 
+UPDATE Offers
+SET status = 'accepted'
+WHERE OfferID = vOfferID;
 
 UPDATE Listings
 SET status = 'closed'
 WHERE listingID = vListingID;
-
-UPDATE Offers 
-SET status = 'accepted'
-WHERE OfferID = vOfferID;
 
 COMMIT;
 
@@ -52,8 +48,9 @@ EXCEPTION
         ROLLBACK;
 END;
 
---CREATE OR REPLACE PROCEDURE Trade (v1Offer_ID Offers.Offer_ID%TYPE, v2Offer_ID Offers.Offer_ID%TYPE)
-
+CREATE OR REPLACE PROCEDURE Trade (v1OfferID Offers.OfferID%TYPE, v2OfferID Offers.OfferID%TYPE)
+IS
 BEGIN
-    purchase(4);
+    purchase(v1OfferID);
+    purchase(v2OfferID);
 END;
