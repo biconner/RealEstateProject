@@ -16,11 +16,21 @@ public class DAO {
         this.avg = avg;
     }
 
-    String getState() { return state; }
-    int getCount() { return count; }
-    int getMin() { return min; }
-    int getMax() { return max; }
-    int getAvg() { return avg; }
+    String getState() {
+        return state;
+    }
+    int getCount() {
+        return count;
+    }
+    int getMin() {
+        return min;
+    }
+    int getMax() {
+        return max;
+    }
+    int getAvg() {
+        return avg;
+    }
 
     @Override
     public String toString() {

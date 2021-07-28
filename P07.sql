@@ -18,6 +18,10 @@ FROM Offers INNER JOIN Listings
 ON Offers.ListingID = Listings.listingID
 WHERE vOfferID = Offers.OfferID;
 
+UPDATE Offers
+SET status = 'accepted'
+WHERE OfferID = vOfferID;
+
 OPEN cBuyers;
         LOOP
             FETCH cBuyers INTO cCustID;
@@ -26,15 +30,9 @@ OPEN cBuyers;
         END LOOP;
     CLOSE cBuyers;
 
-UPDATE Offers
-SET status = 'accepted'
-WHERE OfferID = vOfferID;
-
 UPDATE Listings
 SET status = 'closed'
 WHERE listingID = vListingID;
-
-COMMIT;
 
 EXCEPTION
  WHEN TOO_MANY_ROWS THEN
@@ -53,4 +51,6 @@ IS
 BEGIN
     purchase(v1OfferID);
     purchase(v2OfferID);
+    COMMIT;
 END;
+

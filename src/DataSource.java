@@ -1,17 +1,16 @@
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DataSource {
-
     private static DataSource obj;
     private Connection conn;
 
+
     private DataSource() throws SQLException {
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        conn = DriverManager.getConnection("jdbc:oracle:thin:@Worf.radford.edu:1521:itec3", " ",
-                " ");
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@Worf.radford.edu:1521:itec3", "",
+                "");
     }
 
     static DataSource getInstance() {
@@ -19,7 +18,7 @@ public class DataSource {
             try {
                 obj = new DataSource();
             } catch (SQLException e) {
-                System.out.println("Error connecting to database " + e.getLocalizedMessage());
+                System.err.println("Error connecting to database " + e.getLocalizedMessage());
             }
         return obj;
     }
@@ -89,11 +88,40 @@ public class DataSource {
         return daos;
     }
 
+    public void executeTrade(int offer1, int offer2) throws SQLException {
+        String query = "{call purchase (?)}";
+        try {
+            conn.setAutoCommit(false);
+            CallableStatement offer1Purchase = conn.prepareCall(query);
+            CallableStatement offer2Purchase = conn.prepareCall(query);
+            offer1Purchase.setInt(1, offer1);
+            offer2Purchase.setInt(1, offer2);
+            offer1Purchase.execute();
+            offer2Purchase.execute();
+
+            conn.commit();
+            System.out.println("Trade successful");
+        } catch (SQLException e) {
+            System.err.println("Error occurred during transaction " + e);
+            if (conn != null) {
+                try {
+                    System.err.println("Transaction is being rolled back");
+                    conn.rollback();
+                } catch (SQLException excep) {
+                    System.err.println("Error occurred during rollback " + excep);
+                }
+            }
+        } finally {
+            conn.setAutoCommit(true);
+        }
+
+    }
+
     public void close() {
         try {
             conn.close();
         } catch (SQLException e) {
-            System.out.println("Error closing connection " + e.getLocalizedMessage());
+            System.err.println("Error closing connection " + e.getLocalizedMessage());
         }
     }
 }

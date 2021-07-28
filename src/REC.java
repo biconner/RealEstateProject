@@ -1,47 +1,52 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class REC {
     private final TextIO textView;
     private final CommandParser parser;
+    private boolean isDone;
 
     public REC() {
         this.textView = new TextIO();
         parser = new CommandParser();
         DataSource.getInstance();
+        isDone = false;
     }
 
     void start() {
-        String userCommand = textView.prompt("Please enter a command");
-        String command = parser.parseCommand(userCommand);
+        while (!isDone) {
+            String userCommand = textView.prompt("Please enter a command");
+            String command = parser.parseCommand(userCommand);
 
-        switch (command) {
-            case "help":
-                helpCommand();
-                break;
-            case "quit":
-                quitCommand();
-                break;
-            case "rpt":
-                reportCommand(userCommand);
-                break;
-            default:
-                System.out.println();
-                System.out.println("Invalid command. list commands by typing \"help\"");
+            switch (command) {
+                case "help":
+                    helpCommand();
+                    break;
+                case "quit":
+                    quitCommand();
+                    break;
+                case "rpt":
+                    reportCommand(userCommand);
+                    break;
+                case "trade":
+                    tradeCommand(userCommand);
+                    break;
+                default:
+                    textView.display("\nInvalid command. list commands by typing \"help\"\n");
+            }
         }
-        System.out.println();
     }
 
     void helpCommand() {
-        System.out.println();
-        System.out.println("help");
-        System.out.println("quit");
-        System.out.println("rpt [listing <min> <max>], [summary]");
+        textView.display("\nhelp");
+        textView.display("quit");
+        textView.display("rpt [listing <min> <max>], [summary]");
+        textView.display("trade <offer1> <offer2>");
     }
 
     void quitCommand() {
-        System.exit(0);
+        isDone = true;
     }
 
     void reportCommand(String userCommand) {
@@ -59,21 +64,35 @@ public class REC {
                 summary();
                 break;
             default:
-                System.out.println("Invalid command. list commands by typing \"help\"");
+                textView.display("Invalid command. list commands by typing \"help\"");
         }
+    }
+
+    void tradeCommand(String userCommand) {
+        String[] args = parser.parseArgs(userCommand);
+        if (args.length == 2) {
+            int offer1 = Integer.parseInt(args[0]);
+            int offer2 = Integer.parseInt(args[1]);
+            try {
+                DataSource.getInstance().executeTrade(offer1, offer2);
+            } catch (SQLException e) {
+                textView.display("Error occurred while attempting to set auto commit to true " + e);
+            }
+        }
+        isDone = true;
     }
 
     void listing(String min, String max) {
         try {
-            String query = "SELECT Listing_ID, Num_Bedrooms, Num_Baths, City, State, Price FROM PROPERTIES WHERE PRICE BETWEEN "
-                    + min + " AND " + max + " ORDER BY PRICE";
+            String query = "SELECT ListingID, PropertyID, AskingPrice FROM Listings WHERE AskingPrice BETWEEN "
+                    + min + " AND " + max + " ORDER BY AskingPrice";
             String[][] dataset = DataSource.getInstance().executeQuery(query);
             int[] columnWidths = textView.calculateColumnWidth(dataset);
             String report = textView.formatReport(dataset, 10, columnWidths);
             textView.display(report);
-            quitCommand();
+            isDone = true;
         } catch (SQLException e) {
-            System.out.println("Error " + e);
+            textView.display("Error " + e);
         } finally {
             DataSource.getInstance().close();
         }
@@ -87,20 +106,21 @@ public class REC {
             int[] columnWidths = textView.calculateColumnWidth(dataset);
             String report = textView.formatReport(dataset, 10, columnWidths);
             textView.display(report);
-            quitCommand();
+            isDone = true;
         } catch (SQLException e) {
-            System.out.println("Error getting data: " + e.getLocalizedMessage());
+            textView.display("Error getting data: " + e.getLocalizedMessage());
         } finally {
             DataSource.getInstance().close();
         }
     }
+
 
     private String[] regionSummary(ArrayList<DAO> daos) {
         String count = String.valueOf(totalCount(daos));
         String min = String.valueOf(minPrice(daos));
         String max = String.valueOf(maxPrice(daos));
 
-        String[] regionSummary = new String[]{"", count, min, max, ""};
+        String[] regionSummary = new String[] { "", count, min, max, "" };
         return regionSummary;
     }
 
@@ -143,7 +163,6 @@ public class REC {
 
         dataset[0] = columns;
 
-
         for (int i = 0; i < daos.size(); i++) {
             DAO dao = daos.get(i);
             String state = dao.getState();
@@ -152,7 +171,7 @@ public class REC {
             String max = String.valueOf(dao.getMax());
             String avg = String.valueOf(dao.getAvg());
 
-            String[] rowResult = new String[]{state, count, min, max, avg};
+            String[] rowResult = new String[] { state, count, min, max, avg };
             dataset[i + 1] = rowResult;
         }
 

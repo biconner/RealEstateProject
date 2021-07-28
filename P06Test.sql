@@ -1,17 +1,17 @@
 
 -- Offer with single buyer
 BEGIN
-    CreateOffer(5, 4, 350000, '19-Jul-2021');
+    CreateOffer(5, 1, 350000, '19-Jul-2021');
 END;
 
 --Offer with two buyers
 BEGIN
-    CreateOffer(10, 7, 350000, '19-Jul-2021');
+    CreateOffer(6, 11, 250000, '19-Jul-2021');
 END;
 
 --Offer with three buyers
 BEGIN
-    CreateOffer(12, 9, 2999999, '21-Jul-2021');
+    CreateOffer(10, 9, 350000, '21-Jul-2021');
 END;
 
 --Offer amount that exceeds the approval amount and throws error
@@ -31,3 +31,21 @@ COMMIT;
 -- Update offer amount that will raise error
 UPDATE Offers SET OfferAmount = 2000000 WHERE OFFERID = 4;
 COMMIT;
+
+BEGIN
+    CreateOffer(12, 2, 1250000, '19-Jul-2021');
+END;
+
+BEGIN
+    CreateOffer(13, 4, 1000000, '19-Jul-2021');
+END;
+
+BEGIN
+    CreateOffer(9, 11, 400000, '19-Jul-2021');
+END;
+
+BEGIN
+    CreateOffer(10, 9, 350000, '19-Jul-2021');
+END;
+
+

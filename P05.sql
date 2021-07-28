@@ -230,14 +230,18 @@ INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALU
 INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 3, '12-Oct-2004', 345275, 'closed');
 INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 7, '07-Jul-2008', 450350, 'canceled');
 INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 9, '28-Aug-2008', 400000, 'canceled');
-INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 7, '15-Oct-2011', 350000, 'closed');
-INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 9, '07-Aug-2011', 250000, 'closed');
-INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 10, '12-Nov-2012', 150150, 'closed');
-INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 11, '09-Jan-2013', 600000, 'closed');
-INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 12, '17-May-2014', 425000, 'closed');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 7, '15-Oct-2011', 350000, 'open');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 9, '07-Aug-2011', 250000, 'open');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 10, '12-Nov-2012', 150150, 'open');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 11, '09-Jan-2013', 600000, 'open');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 12, '17-May-2014', 425000, 'open');
 INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 2, '23-Apr-2021', 350000, 'open');
 INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 7, '25-Mar-2021', 150000, 'pending');
 INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 1, '29-Nov-2020', 1250000, 'open');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 4, '22-Dec-2020', 1000000, 'open');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 6, '15-Jan-2021', 180000, 'open');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 5, '4-Mar-2021', 2500000, 'open');
+INSERT INTO Listings (ListingID, PropertyID, ListDate, AskingPrice, Status) VALUES (Listing_Seq.nextval, 8, '28-May-2021', 8000000, 'open');
 
 INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.nextval, 17, 350000);
 INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.nextval, 18, 1350000);
@@ -250,18 +254,27 @@ INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq
 INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.nextval, 7, 3000000);
 INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.currval, 8, 3000000);
 INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.currval, 9, 3000000);
+INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.nextval, 1, 350000);
+INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.currval, 2, 350000);
+INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.currval, 3, 350000);
+INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.nextval, 4, 8000000);
+INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.nextval, 5, 400000);
+INSERT INTO Preapprovals (PreApprovalID, CustID, Amount) VALUES (PreApproval_Seq.currval, 6, 400000);
 
 
 INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '25-Apr-2021', '25-May-2021', 'Bank of America', 350000);
 INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '18-Mar-2021', '18-Apr-2021', 'Capital One', 1350000);
 INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '18-Mar-2021', '18-Apr-2021', 'Bank of America', 1500000);
-INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '20-Mar-2020', '20-Apr-2020', 'Capital One', 15000000);
-INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '20-Mar-2020', '20-Apr-2020', 'Wells Fargo', 14000000);
-INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '20-Mar-2020', '20-Apr-2020', 'Bank of America', 14500000);
-INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (7, '20-Mar-2020', '20-Apr-2020', 'Bank of America', 1500000);
-INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (9, '20-Mar-2020', '20-Apr-2020', 'Bank of America', 3000000);
-INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (9, '20-Mar-2020', '20-Apr-2020', 'Bank of America', 3000000);
-INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (9, '20-Mar-2020', '20-Apr-2020', 'Bank of America', 3000000);
+INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '20-Mar-2020', '20-Apr-2020', 'Capital One', 1400000);
+INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '20-Mar-2020', '20-Apr-2020', 'Wells Fargo', 1450000);
+INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '20-Mar-2020', '20-Apr-2020', 'Bank of America', 1500000);
+INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '20-Jun-2021', '20-Jul-2021', 'Skyline Bank', 1500000);
+INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '25-Jun-2021', '25-Jul-2021', 'Bank of America', 3000000);
+INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '10-Jul-2021', '10-Aug-2021', 'Atlantic Union', 350000);
+INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '11-Jul-2021', '11-Aug-2021', 'Bank of America', 8000000);
+INSERT INTO ApprovalDetails (ApprovalID, ApprovalDate, ExpireDate, Lender, Amount) VALUES (Approval_Seq.nextval, '15-Jul-2021', '15-Aug-2021', 'Bank of America', 400000);
+
+
 
 INSERT INTO Offers (OfferID, ListingID, OfferDate, ExpireDate, OfferAmount, Status, ApprovalNo) VALUES (Offer_Seq.nextval, 10, '21-Apr-2021', '18-Apr-2021', 295150, 'accepted', 1);
 INSERT INTO Offers (OfferID, ListingID, OfferDate, ExpireDate, OfferAmount, Status, ApprovalNo) VALUES (Offer_Seq.nextval, 12, '22-Apr-2021', '29-Apr-2021', 1250000, 'accepted', 2);
@@ -272,3 +285,5 @@ INSERT INTO OfferParticipants (OfferID, CustID) VALUES (2, 18);
 INSERT INTO OfferParticipants (OfferID, CustID) VALUES (3, 19);
 
 COMMIT;
+
+ROLLBACK;

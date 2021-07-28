@@ -3,7 +3,7 @@ import java.util.*;
 
 public class TextIO {
 
-    private Scanner scan;
+    private final Scanner scan;
 
     public TextIO() {
         this.scan = new Scanner(System.in);
@@ -33,17 +33,17 @@ public class TextIO {
     }
 
     public String formatReport(String[][] results, int padding, int[] columnWidths) {
-        String report = "";
+        StringBuilder report = new StringBuilder();
         for (int i = 0; i < results.length; i++) {
             for (int j = 0; j < results[0].length; j++) {
                 String data = results[i][j];
                 int columnWidth = columnWidths[j];
-                report += String.format("%-" + (columnWidth + padding) + "s", data);
+                report.append(String.format("%-" + (columnWidth + padding) + "s", data));
             }
 
-            report += "\n";
+            report.append("\n");
         }
-        return report;
+        return report.toString();
     }
 
     public String prompt(String msg) {
